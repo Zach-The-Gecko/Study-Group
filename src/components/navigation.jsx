@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { auth } from "../firebase/firebase.utils";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { ReactComponent as GroupChatIcon } from "../static/group-chat-icon.svg";
+import GroupChatIcon from "../static/group-chat-icon.png";
+import PrivateChatIcon from "../static/private-chat-icon.png";
 
 // Going to add Icons instead of words when screen gets smaller
 
@@ -26,6 +27,14 @@ const NavigationText = styled(Link)`
   cursor: pointer;
   text-decoration: none;
   color: #fff;
+  &::before {
+    content: ${(props) => `"${props.text}"`};
+  }
+  @media only screen and (max-width: 60000px) {
+    &::before {
+      content: ${(props) => `url("${props.img}")`};
+    }
+  }
 `;
 const SignOut = styled.span`
   color: tomato;
@@ -37,10 +46,13 @@ const Navigation = ({ currentUser }) => {
   return (
     <NavigationBar>
       <NavigationHeading>Hello, {currentUser.displayName}</NavigationHeading>
-      <GroupChatIcon />
-      <NavigationText to="/home">Home</NavigationText>
-      <NavigationText to="/group-chat">Group Chat</NavigationText>
-      <NavigationText to="/private-chat">Private Chat</NavigationText>
+      <NavigationText to="/home" />
+      <NavigationText to="/group-chat" img={GroupChatIcon} text="Group Chat" />
+      <NavigationText
+        to="/private-chat"
+        img={PrivateChatIcon}
+        text="Private Chats"
+      />
       <SignOut onClick={() => auth.signOut()}>Sign Out</SignOut>
     </NavigationBar>
   );
