@@ -31,7 +31,7 @@ const NavigationText = styled(Link)`
   color: #212121;
   &::before {
     content: ${(props) => `"${props.text}"`};
-    color: ${(props) => (props.signOut ? "Tomato" : "")};
+    color: ${(props) => (props.signout ? "Tomato" : "")};
   }
   @media only screen and (max-width: 1000px) {
     &::before {
@@ -44,7 +44,9 @@ const NavigationText = styled(Link)`
 const Navigation = ({ currentUser }) => {
   return (
     <NavigationBar>
-      <NavigationHeading>Hello, {currentUser.displayName}</NavigationHeading>
+      <NavigationHeading>
+        Hello, {currentUser.nickName || currentUser.displayName}
+      </NavigationHeading>
       <NavigationText to="/home" text="Home" img={HomeIcon} />
       <NavigationText to="/group-chat" img={GroupChatIcon} text="Group Chat" />
       <NavigationText
@@ -56,7 +58,7 @@ const Navigation = ({ currentUser }) => {
         onClick={() => auth.signOut()}
         text="Sign Out"
         img={SignOutIcon}
-        signOut
+        signout={1}
       />
     </NavigationBar>
   );

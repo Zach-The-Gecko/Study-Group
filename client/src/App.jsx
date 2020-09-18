@@ -8,6 +8,7 @@ import Navigation from "./components/navigation";
 
 import SignInPage from "./pages/sign-in-page";
 import HomePage from "./pages/home-page";
+import GroupChat from "./pages/group-chat-page";
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
@@ -41,6 +42,7 @@ class App extends React.Component {
           <L>
             <Navigation />
             <Route exact path="/home" component={HomePage} />
+            <Route exact path="/group-chat" component={GroupChat} />
           </L>
         ) : (
           <SignInPage />

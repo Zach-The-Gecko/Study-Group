@@ -39,6 +39,12 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
+export const getUserData = async (id) => {
+  const userRef = firestore.doc(`users/${id}`);
+  const snapShot = await userRef.get();
+  return snapShot.data();
+};
+
 firebase.initializeApp(config);
 
 export const auth = firebase.auth();
